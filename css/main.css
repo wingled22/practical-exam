@@ -1,0 +1,58 @@
+html{
+	margin: 0px;
+	padding: 0px;
+	background: #c0e6f5;
+	font-size: 20px;
+	line-height: 15px;
+	font-family: arial;
+}
+
+#container{
+	width: 50%;
+	margin: auto;
+}
+
+menu>*{
+	margin: auto;
+	display: inline-block;
+}
+
+menu>*>button{
+	width: 500px;
+	font-size: 20px;
+
+}
+
+form{
+	/*margin: auto;*/
+	width: 100%;
+}
+
+form>*{
+	padding: 5px;
+}
+
+form>input , form>select{
+	width: 100%;
+	margin: auto;
+	display: inline-block;
+	margin-top: 2px;
+}
+
+table{
+	width: 100%;
+	margin: 5px;
+	background:  #f0fbff;
+}
+
+td{
+	font-size: 15px;
+}
+
+table thead th{
+	background: #88f76c;
+}
+
+tbody tr:nth-child(odd) {
+	background: #c9c9c9;
+}
