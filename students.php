@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<div id="container">
 
-		<form>
+		<form action="add_student.php" method="POST">
 			<input type="text" name="firstname">
 			<input type="text" name="lastname">
 			<select name="course">
