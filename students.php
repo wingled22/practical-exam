@@ -1,3 +1,20 @@
+<?php 
+
+include_once 'DB.php';
+
+if(isset($_POST['submit'])){
+
+	$sql = "INSERT INTO student (s_fname, s_lname, s_course) values ( :fname, :lname, :course)";
+ 	if(Database::query($sql, array(':fname'=>$_POST['firstname'], ':lname'=>$_POST['lastname'], ':course'=>$_POST['course']))){
+ 		echo "<h4 style=\"text-align: center\">Added Successfully</h4>";
+ 	}
+}
+
+
+
+ ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<div id="container">
 
-		<form action="add_student.php" method="POST">
+		<form action="" method="POST">
 			<input type="text" name="firstname">
 			<input type="text" name="lastname">
 			<select name="course">
@@ -16,7 +33,7 @@
 				<option value="BEED">BEED</option>
 				<option value="BSCrim">BSCrim</option>
 			</select>
-			<input type="submit" name="">
+			<input type="submit" name="submit" value="submit">
 		</form>
 		<br>
 		<table>
@@ -24,30 +41,31 @@
 				<th>head</th>
 				<th>head</th>
 				<th>head</th>
+				<th>head</th>
 				<th>Action</th>
 			</thead>
 			<tbody>
+				<?php 
+					$sql = "SELECT * from student";
+ 					$rows = Database::query($sql);
+ 					foreach ($rows as $row) {
+ 						?>
 				<tr>
-					<td>t=asdf</td>
-					<td>t=asdf</td>
-					<td>t=asdf</td>
-					<td>update || delete</td>
+					<td><?php echo $row['s_id'];?></td>
+					<td><?php echo $row['s_fname'];?></td>
+					<td><?php echo $row['s_lname'];?></td>
+					<td><?php echo $row['s_course'];?></td>
+					<td>
+						<a href="student_update.php?id=<?php  echo $row['s_id']?>">edit</a>
+						<a href="student_delete.php?id=<?php  echo $row['s_id']?>">delete</a>
+					</td>
 				</tr>
 
-				<tr>
-					<td>the brown fox</td>
-					<td>the brown fox</td>
-					<td>the brown fox</td>
-					<td>update || delete</td>
+ 						<?php
+ 					}
+				 ?>
 
-				</tr>
-
-				<tr>
-					<td>jumps the lazy dog	</td>
-					<td>jumps the lazy dog	</td>
-					<td>jumps the lazy dog	</td>
-					<td>update || delete</td>
-				</tr>
+				
 			</tbody>
 		</table>
 	</div>
