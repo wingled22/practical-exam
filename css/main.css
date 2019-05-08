@@ -24,12 +24,12 @@ menu>*>button{
 }
 
 form{
-	/*margin: auto;*/
 	width: 100%;
 }
 
 form>*{
 	padding: 5px;
+	/*text-align: center;*/
 }
 
 form>input , form>select{
