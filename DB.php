@@ -1,10 +1,5 @@
-
 <?php 
-
-
-
 class Database{
-	
 	public static function connect(){
 		$dsn = 'mysql:dbname=test;host=127.0.0.1';
 		$user = 'root';
@@ -20,61 +15,55 @@ class Database{
 
 
 	public static function query($sql, $params = array()){
-		
-
-	try {
-
-
-		$pieces;
-		$pieces = explode(" ", $sql);
+		try {
+			$pieces;
+			$pieces = explode(" ", $sql);
 
 
-		if ($pieces[0] === "SELECT") {
+			if ($pieces[0] === "SELECT") {
 
-			$statement = self::connect()->prepare($sql);
-			$statement->execute($params);
-			$data=array();
+				$statement = self::connect()->prepare($sql);
+				$statement->execute($params);
+				$data=array();
 
 
-			if($statement->rowCount() > 0){
-				foreach ($result = $statement->fetchAll() as $row ) {
-					array_push($data, $row);
-			}
-			}
+				if($statement->rowCount() > 0){
+					foreach ($result = $statement->fetchAll() as $row ) {
+						array_push($data, $row);
+				}
+				}
 
-			return $data;
-		}elseif ($pieces[0] === "INSERT"){
+				return $data;
+			}elseif ($pieces[0] === "INSERT"){
 
-			$statement = self::connect()->prepare($sql);
-			if($statement->execute($params)){
-				return true;
+				$statement = self::connect()->prepare($sql);
+				if($statement->execute($params)){
+					return true;
+				}else{
+					return false;
+				}
+			}elseif($pieces[0] === "UPDATE"){
+				$statement = self::connect()->prepare($sql);
+				if($statement->execute($params)){
+					return true;
+				}else{
+					return false;
+				}
+			}elseif($pieces[0] === "DELETE"){
+				$statement = self::connect()->prepare($sql);
+				if($statement->execute($params)){
+					return true;
+				}else{
+					return false;
+				}
 			}else{
-				return false;
+				$statement = self::connect()->prepare($sql);
+				$statement->execute($params);
+				return $statement;
 			}
-		}elseif($pieces[0] === "UPDATE"){
-			$statement = self::connect()->prepare($sql);
-			if($statement->execute($params)){
-				return true;
-			}else{
-				return false;
-			}
-		}elseif($pieces[0] === "DELETE"){
-			$statement = self::connect()->prepare($sql);
-			if($statement->execute($params)){
-				return true;
-			}else{
-				return false;
-			}
-		}else{
-			$statement = self::connect()->prepare($sql);
-			$statement->execute($params);
-			return $statement;
+
+		} catch (Exception $e) {
+			echo $e;
 		}
-
-	} catch (Exception $e) {
-		echo $e;
 	}
-	}
-
-
 }
